@@ -1,5 +1,6 @@
 package com.empresa.controller;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,4 +89,17 @@ public class AlumnoController {
 		}
 
 	}
+	
+	
+	@GetMapping("/{dni}")
+	public ResponseEntity<List<Alumno>> listaAlumno(@PathVariable("dni") String dni){
+		 log.info("listaaadoo");
+		List<Alumno> obj = service.listaPorDni(dni);
+		if(obj.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}else {		
+			return new ResponseEntity<>(obj, HttpStatus.OK);
+		}
+	}
+
 }
